@@ -10,20 +10,23 @@
 		"url": "https://github.com/vadimdemedes"
 	},
 	"main": "dist/ink.js",
+	"module": "dist/ink.mjs",
 	"types": "types/index.d.ts",
 	"engines": {
 		"node": ">=10"
 	},
 	"scripts": {
-		"build": "vite build --ssr",
+		"build": "rm -rf dist && vite build --ssr && ./build.js && rm -rf tmp && npm run types",
 		"prepare": "npm run build",
-		"ink": "babel-node -x \".js\",\".jsx\",\".es6\",\".es\",\".ts\",\".tsx\",\".cjs\" --config-file ./babel.config.js --ignore dist",
+		"ink": "babel-node -x \".js\",\".jsx\",\".es6\",\".es\",\".ts\",\".tsx\",\".cjs\" --config-file ./babel.config.test.js --ignore dist",
 		"types": "tsc --emitDeclarationOnly",
-		"test": "tsc --noEmit && xo && FORCE_COLOR=true ava"
+		"test": "tsc --noEmit && xo && FORCE_COLOR=true ava",
+		"clean": "rm -rf node_modules && rm -rf dist && rm -rf types && rm -rf .turbo"
 	},
 	"files": [
 		"dist",
-		"types"
+		"types",
+		"babel.config.js"
 	],
 	"keywords": [
 		"react",
@@ -82,7 +85,6 @@
 		"eslint-plugin-react-hooks": "^2.3.0",
 		"estrella": "^1.4.1",
 		"indent-string": "^4.0.0",
-		"import-jsx": "workspace:^4.0.0",
 		"is-ci": "^2.0.0",
 		"lodash": "^4.17.20",
 		"ms": "^2.1.1",

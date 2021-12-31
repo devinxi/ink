@@ -34,16 +34,20 @@ const esm = {
 	]
 };
 
-estrella.build({
-	entry: 'tmp/index.js',
-	outfile: 'dist/ink.js',
-	...cjs,
-	tsc: false
-});
+function script() {
+	estrella.build({
+		entry: 'tmp/index.js',
+		outfile: 'dist/ink.js',
+		...cjs,
+		tsc: false
+	});
 
-estrella.build({
-	entry: 'tmp/index.js',
-	outfile: 'dist/ink.mjs',
-	...esm,
-	tsc: false
-});
+	estrella.build({
+		entry: 'tmp/index.js',
+		outfile: 'dist/ink.mjs',
+		...esm,
+		tsc: false
+	});
+}
+
+script();
