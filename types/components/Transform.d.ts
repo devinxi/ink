@@ -1,10 +1,10 @@
-import { FC, ReactNode } from 'solid-js';
+import { JSX, FC } from 'solid-js';
 export interface Props {
     /**
      * Function which transforms children output. It accepts children and must return transformed children too.
      */
     readonly transform: (children: string) => string;
-    readonly children?: ReactNode;
+    readonly children?: JSX.Element;
 }
 /**
  * Transform a string representation of React components before they are written to output.

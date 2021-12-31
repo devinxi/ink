@@ -8,12 +8,12 @@ module.exports = {
 			'babel-plugin-transform-rename-import',
 			{
 				original: 'solid-js',
-				replacement: 'solid-ink'
+				replacement: '..'
 			}
 		],
 		[
 			'babel-plugin-jsx-dom-expressions',
-			{moduleName: 'solid-ink', generate: 'universal'}
+			{moduleName: '..', generate: 'universal'}
 		]
 	]
 };
