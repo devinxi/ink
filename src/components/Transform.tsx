@@ -1,4 +1,4 @@
-import React, {FC, ReactNode} from 'react';
+import {JSX} from 'solid-js';
 
 export interface Props {
 	/**

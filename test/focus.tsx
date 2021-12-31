@@ -1,5 +1,5 @@
 import EventEmitter from 'events';
-import React, {useEffect, FC} from 'react';
+import React, {createEffect, FC} from 'solid-js';
 import delay from 'delay';
 import test from 'ava';
 import {spy} from 'sinon';
@@ -38,7 +38,7 @@ const Test: FC<TestProps> = ({
 }) => {
 	const focusManager = useFocusManager();
 
-	useEffect(() => {
+	createEffect(() => {
 		if (disabled) {
 			focusManager.disableFocus();
 		} else {
@@ -46,13 +46,13 @@ const Test: FC<TestProps> = ({
 		}
 	}, [disabled]);
 
-	useEffect(() => {
+	createEffect(() => {
 		if (focusNext) {
 			focusManager.focusNext();
 		}
 	}, [focusNext]);
 
-	useEffect(() => {
+	createEffect(() => {
 		if (focusPrevious) {
 			focusManager.focusPrevious();
 		}

@@ -4,10 +4,10 @@ const React = require('react');
 const {render, Static, Box, Text} = require('../..');
 
 const App = () => {
-	const [items, setItems] = React.useState([]);
+	const [items, setItems] = createSignal([]);
 	const itemCountRef = React.useRef(0);
 
-	React.useEffect(() => {
+	createEffect(() => {
 		let timer;
 
 		const run = () => {

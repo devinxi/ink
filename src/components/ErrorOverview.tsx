@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import React, {FC} from 'react';
+import React, {FC} from 'solid-js';
 import StackUtils from 'stack-utils';
 import codeExcerpt, {ExcerptLine} from 'code-excerpt';
 import Box from './Box';

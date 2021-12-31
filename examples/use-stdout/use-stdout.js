@@ -5,7 +5,7 @@ const {render, Box, Text, useStdout} = require('../..');
 const Example = () => {
 	const {stdout, write} = useStdout();
 
-	React.useEffect(() => {
+	createEffect(() => {
 		const timer = setInterval(() => {
 			write('Hello from Ink to stdout\n');
 		}, 1000);

@@ -1,4 +1,4 @@
-import React, {Suspense} from 'react';
+import React, {Suspense} from 'solid-js';
 import test from 'ava';
 import chalk from 'chalk';
 import {Box, Text, render} from '../src';

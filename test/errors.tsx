@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/string-content */
-import React from 'react';
+import {JSX} from 'solid-js';
 import test from 'ava';
 import patchConsole from 'patch-console';
 import stripAnsi from 'strip-ansi';

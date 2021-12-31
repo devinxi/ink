@@ -1,2 +1,2 @@
 'use strict';
-require('import-jsx')('./table');
+require('import-jsx')('./table', {importPath: '../..'});

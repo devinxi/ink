@@ -1,4 +1,4 @@
-import React, {FC, ReactNode} from 'react';
+import React, {FC, ReactNode} from 'solid-js';
 import chalk, {ForegroundColor} from 'chalk';
 import colorize from '../colorize';
 import {Styles} from '../styles';

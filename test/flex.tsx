@@ -1,4 +1,4 @@
-import React from 'react';
+import {JSX} from 'solid-js';
 import test from 'ava';
 import {renderToString} from './helpers/render-to-string';
 import {Box, Text} from '../src';

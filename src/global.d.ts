@@ -1,9 +1,9 @@
-import {ReactNode, Key, LegacyRef} from 'react';
+import {JSX} from 'solid-js';
 import {Except} from 'type-fest';
 import {DOMElement} from './dom';
 import {Styles} from './styles';
 
-declare global {
+declare module 'solid-js' {
 	namespace JSX {
 		interface IntrinsicElements {
 			'ink-box': Ink.Box;
@@ -14,14 +14,14 @@ declare global {
 
 declare namespace Ink {
 	interface Box {
-		children?: ReactNode;
+		children?: JSX.Element;
 		key?: Key;
 		ref?: LegacyRef<DOMElement>;
 		style?: Except<Styles, 'textWrap'>;
 	}
 
 	interface Text {
-		children?: ReactNode;
+		children?: JSX.Element;
 		key?: Key;
 		style?: Styles;
 		internal_transform?: (children: string) => string;

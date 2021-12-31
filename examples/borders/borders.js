@@ -1,5 +1,4 @@
 'use strict';
-const React = require('react');
 const {render, Box, Text} = require('../..');
 
 const Borders = () => (
@@ -38,4 +37,4 @@ const Borders = () => (
 	</Box>
 );
 
-render(<Borders />);
+render(() => <Borders />);

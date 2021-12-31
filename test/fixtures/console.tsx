@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
+import React, {createEffect} from 'solid-js';
 import {Text, render} from '../..';
 
 const App = () => {
-	useEffect(() => {
+	createEffect(() => {
 		const timer = setTimeout(() => {}, 1000);
 
 		return () => {

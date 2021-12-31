@@ -1,5 +1,5 @@
 delete process.env.CI;
-import React from 'react';
+import {JSX} from 'solid-js';
 import {serial as test} from 'ava';
 import {spawn} from 'node-pty';
 import ansiEscapes from 'ansi-escapes';

@@ -1,2 +1,2 @@
 'use strict';
-require('import-jsx')('./static');
+require('import-jsx')('./static', {importPath: '../..'});

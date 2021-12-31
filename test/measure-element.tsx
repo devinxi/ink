@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect, FC} from 'react';
+import React, {createSignal, useRef, createEffect, FC} from 'solid-js';
 import test from 'ava';
 import delay from 'delay';
 import {Box, Text, render, measureElement} from '..';
@@ -8,10 +8,10 @@ test('measure element', async t => {
 	const stdout = createStdout();
 
 	const Test: FC = () => {
-		const [width, setWidth] = useState(0);
+		const [width, setWidth] = createSignal(0);
 		const ref = useRef();
 
-		useEffect(() => {
+		createEffect(() => {
 			setWidth(measureElement(ref.current).width);
 		}, []);
 

@@ -31,13 +31,13 @@ npm install ink react
 ## Usage
 
 ```jsx
-import React, {useState, useEffect} from 'react';
+import React, {createSignal, createEffect} from 'solid-js';
 import {render, Text} from 'ink';
 
 const Counter = () => {
-	const [counter, setCounter] = useState(0);
+	const [counter, setCounter] = createSignal(0);
 
-	useEffect(() => {
+	createEffect(() => {
 		const timer = setInterval(() => {
 			setCounter(previousCounter => previousCounter + 1);
 		}, 100);
@@ -163,7 +163,7 @@ npm install --save-dev @babel/preset-react
 Next, create a file `source.js`, where you'll type code that uses Ink:
 
 ```jsx
-import React from 'react';
+import {JSX} from 'solid-js';
 import {render, Text} from 'ink';
 
 const Demo = () => <Text>Hello World</Text>;
@@ -938,13 +938,13 @@ a list of completed tests. [Gatsby](https://github.com/gatsbyjs/gatsby) uses it
 to display a list of generated pages, while still displaying a live progress bar.
 
 ```jsx
-import React, {useState, useEffect} from 'react';
+import React, {createSignal, createEffect} from 'solid-js';
 import {render, Static, Box, Text} from 'ink';
 
 const Example = () => {
-	const [tests, setTests] = useState([]);
+	const [tests, setTests] = createSignal([]);
 
-	useEffect(() => {
+	createEffect(() => {
 		let completedTests = 0;
 		let timer;
 
@@ -1239,7 +1239,7 @@ const Example = () => {
 	const {exit} = useApp();
 
 	// Exit the app after 5 seconds
-	useEffect(() => {
+	createEffect(() => {
 		setTimeout(() => {
 			exit();
 		}, 5000);
@@ -1311,7 +1311,7 @@ import {useStdin} from 'ink';
 const Example = () => {
 	const {setRawMode} = useStdin();
 
-	useEffect(() => {
+	createEffect(() => {
 		setRawMode(true);
 
 		return () => {
@@ -1360,7 +1360,7 @@ import {useStdout} from 'ink';
 const Example = () => {
 	const {write} = useStdout();
 
-	useEffect(() => {
+	createEffect(() => {
 		// Write a single message to stdout, above Ink's output
 		write('Hello from Ink to stdout\n');
 	}, []);
@@ -1411,7 +1411,7 @@ import {useStderr} from 'ink';
 const Example = () => {
 	const {write} = useStderr();
 
-	useEffect(() => {
+	createEffect(() => {
 		// Write a single message to stderr, above Ink's output
 		write('Hello from Ink to stderr\n');
 	}, []);
@@ -1480,7 +1480,7 @@ import {useFocusManager} from 'ink';
 const Example = () => {
 	const {enableFocus} = useFocusManager();
 
-	useEffect(() => {
+	createEffect(() => {
 		enableFocus();
 	}, []);
 
@@ -1499,7 +1499,7 @@ import {useFocusManager} from 'ink';
 const Example = () => {
 	const {disableFocus} = useFocusManager();
 
-	useEffect(() => {
+	createEffect(() => {
 		disableFocus();
 	}, []);
 
@@ -1521,7 +1521,7 @@ import {useFocusManager} from 'ink';
 const Example = () => {
 	const {focusNext} = useFocusManager();
 
-	useEffect(() => {
+	createEffect(() => {
 		focusNext();
 	}, []);
 
@@ -1543,7 +1543,7 @@ import {useFocusManager} from 'ink';
 const Example = () => {
 	const {focusPrevious} = useFocusManager();
 
-	useEffect(() => {
+	createEffect(() => {
 		focusPrevious();
 	}, []);
 
@@ -1691,7 +1691,7 @@ Measure the dimensions of a particular `<Box>` element.
 It returns an object with `width` and `height` properties.
 This function is useful when your component needs to know the amount of available space it has. You could use it when you need to change the layout based on the length of its content.
 
-**Note:** `measureElement()` returns correct results only after the initial render, when layout has been calculated. Until then, `width` and `height` equal to zero. It's recommended to call `measureElement()` in a `useEffect` hook, which fires after the component has rendered.
+**Note:** `measureElement()` returns correct results only after the initial render, when layout has been calculated. Until then, `width` and `height` equal to zero. It's recommended to call `measureElement()` in a `createEffect` hook, which fires after the component has rendered.
 
 ##### ref
 
@@ -1706,7 +1706,7 @@ import {render, measureElement, Box, Text} from 'ink';
 const Example = () => {
 	const ref = useRef();
 
-	useEffect(() => {
+	createEffect(() => {
 		const {width, height} = measureElement(ref.current);
 		// width = 100, height = 1
 	}, []);
@@ -1729,7 +1729,7 @@ Ink components are simple to test with [ink-testing-library](https://github.com/
 Here's a simple example that checks how component is rendered:
 
 ```jsx
-import React from 'react';
+import {JSX} from 'solid-js';
 import {Text} from 'ink';
 import {render} from 'ink-testing-library';
 

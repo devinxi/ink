@@ -1,4 +1,12 @@
-import React, {useMemo, useState, useLayoutEffect, ReactNode} from 'react';
+import React, {
+	createMemo,
+	createSignal,
+	createRenderEffect,
+	ReactNode,
+	For,
+	children,
+	createEffect
+} from 'solid-js';
 import {Styles} from '../styles';
 
 export interface Props<T> {
@@ -33,37 +41,37 @@ export interface Props<T> {
  * to display a list of generated pages, while still displaying a live progress bar.
  */
 const Static = <T,>(props: Props<T>) => {
-	const {items, children: render, style: customStyle} = props;
-	const [index, setIndex] = useState(0);
+	const [index, setIndex] = createSignal(0);
 
-	const itemsToRender: T[] = useMemo(() => {
-		return items.slice(index);
-	}, [items, index]);
-
-	useLayoutEffect(() => {
-		setIndex(items.length);
-	}, [items.length]);
-
-	const children = itemsToRender.map((item, itemIndex) => {
-		return render(item, index + itemIndex);
+	const itemsToRender: T[] = createMemo(() => {
+		return props.items.slice(index());
 	});
 
-	const style: Styles = useMemo(
-		() => ({
-			position: 'absolute',
-			flexDirection: 'column',
-			...customStyle
-		}),
-		[customStyle]
-	);
+	createEffect(() => {
+		console.log(itemsToRender());
+	});
+	// createEffect(() => {
+	// 	console.log(props.items.length);
+	// 	setIndex(props.items.length);
+	// });
+
+	const style: Styles = createMemo(() => ({
+		position: 'absolute',
+		flexDirection: 'column',
+		...props.customStyle
+	}));
 
 	return (
 		<ink-box
 			// @ts-ignore
 			internal_static
-			style={style}
+			style={style()}
 		>
-			{children}
+			{itemsToRender().map((item, itemIndex) => {
+				// console.log(item, itemIndex, console.log(props.children(item)));
+				// process.exit();
+				return props.children(item);
+			})}
 		</ink-box>
 	);
 };

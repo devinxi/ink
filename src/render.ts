@@ -1,4 +1,4 @@
-import {ReactElement} from 'react';
+import {JSX} from 'solid-js';
 import Ink, {Options as InkOptions} from './ink';
 import instances from './instances';
 import {Stream} from 'stream';
@@ -64,7 +64,7 @@ export interface Instance {
 }
 
 type RenderFunction = <Props, K extends NodeJS.WriteStream | RenderOptions>(
-	tree: ReactElement<Props>,
+	tree: () => JSX.Element,
 	options?: K
 ) => Instance;
 

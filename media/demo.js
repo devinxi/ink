@@ -12,26 +12,22 @@ class Counter extends React.PureComponent {
 	}
 
 	render() {
-		return React.createElement(
+		return createElement(
 			Box,
 			{flexDirection: 'column'},
-			React.createElement(
+			createElement(
 				Box,
 				{},
-				React.createElement(Text, {color: 'blue'}, '~/Projects/ink ')
+				createElement(Text, {color: 'blue'}, '~/Projects/ink ')
 			),
-			React.createElement(
+			createElement(
 				Box,
 				{},
-				React.createElement(Text, {color: 'magenta'}, '❯ '),
-				React.createElement(Text, {color: 'green'}, 'node '),
-				React.createElement(Text, {}, 'media/example')
+				createElement(Text, {color: 'magenta'}, '❯ '),
+				createElement(Text, {color: 'green'}, 'node '),
+				createElement(Text, {}, 'media/example')
 			),
-			React.createElement(
-				Text,
-				{color: 'green'},
-				`${this.state.i} tests passed`
-			)
+			createElement(Text, {color: 'green'}, `${this.state.i} tests passed`)
 		);
 	}
 
@@ -52,4 +48,4 @@ class Counter extends React.PureComponent {
 	}
 }
 
-render(React.createElement(Counter));
+render(createElement(Counter));

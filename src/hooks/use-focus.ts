@@ -1,4 +1,4 @@
-import {useEffect, useContext, useMemo} from 'react';
+import {createEffect, useContext, createMemo} from 'solid-js';
 import FocusContext from '../components/FocusContext';
 import useStdin from './use-stdin';
 
@@ -48,11 +48,11 @@ const useFocus = ({
 	const {activeId, add, remove, activate, deactivate, focus} =
 		useContext(FocusContext);
 
-	const id = useMemo(() => {
+	const id = createMemo(() => {
 		return customId ?? Math.random().toString().slice(2, 7);
 	}, [customId]);
 
-	useEffect(() => {
+	createEffect(() => {
 		add(id, {autoFocus});
 
 		return () => {
@@ -60,7 +60,7 @@ const useFocus = ({
 		};
 	}, [id, autoFocus]);
 
-	useEffect(() => {
+	createEffect(() => {
 		if (isActive) {
 			activate(id);
 		} else {
@@ -68,7 +68,7 @@ const useFocus = ({
 		}
 	}, [isActive, id]);
 
-	useEffect(() => {
+	createEffect(() => {
 		if (!isRawModeSupported || !isActive) {
 			return;
 		}
