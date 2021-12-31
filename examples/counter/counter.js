@@ -1,11 +1,10 @@
 'use strict';
-const React = require('react');
-const {render, Text} = require('../..');
+const {render, Text, createSignal, createEffect} = require('../..');
 
 const Counter = () => {
-	const [counter, setCounter] = React.useState(0);
+	const [counter, setCounter] = createSignal(0);
 
-	React.useEffect(() => {
+	createEffect(() => {
 		const timer = setInterval(() => {
 			setCounter(prevCounter => prevCounter + 1); // eslint-disable-line unicorn/prevent-abbreviations
 		}, 100);
@@ -18,4 +17,4 @@ const Counter = () => {
 	return <Text color="green">{counter} tests passed</Text>;
 };
 
-render(<Counter />);
+render(() => <Counter />);

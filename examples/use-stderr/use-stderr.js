@@ -5,7 +5,7 @@ const {render, Text, useStderr} = require('../..');
 const Example = () => {
 	const {write} = useStderr();
 
-	React.useEffect(() => {
+	createEffect(() => {
 		const timer = setInterval(() => {
 			write('Hello from Ink to stderr\n');
 		}, 1000);

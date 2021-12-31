@@ -211,7 +211,7 @@ const findClosestYogaNode = (node?: DOMNode): YogaNode | undefined => {
 	return node.yogaNode ?? findClosestYogaNode(node.parentNode);
 };
 
-const markNodeAsDirty = (node?: DOMNode): void => {
+export const markNodeAsDirty = (node?: DOMNode): void => {
 	// Mark closest Yoga node as dirty to measure text dimensions again
 	const yogaNode = findClosestYogaNode(node);
 	yogaNode?.markDirty();

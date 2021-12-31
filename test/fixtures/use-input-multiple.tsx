@@ -1,9 +1,9 @@
-import React, {FC, useState, useCallback, useEffect} from 'react';
+import React, {FC, createSignal, useCallback, createEffect} from 'solid-js';
 import {render, useInput, useApp, Text} from '../..';
 
 const App: FC = () => {
 	const {exit} = useApp();
-	const [input, setInput] = useState('');
+	const [input, setInput] = createSignal('');
 
 	const handleInput = useCallback((input: string) => {
 		setInput((previousInput: string) => previousInput + input);
@@ -12,7 +12,7 @@ const App: FC = () => {
 	useInput(handleInput);
 	useInput(handleInput, {isActive: false});
 
-	useEffect(() => {
+	createEffect(() => {
 		setTimeout(exit, 1000);
 	}, []);
 

@@ -4,8 +4,8 @@ const {render, useInput, useApp, Box, Text} = require('../..');
 
 const Robot = () => {
 	const {exit} = useApp();
-	const [x, setX] = React.useState(1);
-	const [y, setY] = React.useState(1);
+	const [x, setX] = createSignal(1);
+	const [y, setY] = createSignal(1);
 
 	useInput((input, key) => {
 		if (input === 'q') {

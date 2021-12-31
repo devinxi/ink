@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC} from 'solid-js';
 import {render, useInput, useApp} from '../..';
 
 const UserInput: FC<{test: string}> = ({test}) => {

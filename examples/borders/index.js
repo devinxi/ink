@@ -1,2 +1,2 @@
 'use strict';
-require('import-jsx')('./borders');
+require('import-jsx')('./borders', {importPath: '../..'});

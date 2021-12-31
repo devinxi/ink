@@ -1,4 +1,4 @@
-import React from 'react';
+import {JSX} from 'solid-js';
 import {render, Text, useApp} from '../..';
 
 class Exit extends React.Component<

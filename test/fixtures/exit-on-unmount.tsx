@@ -1,4 +1,4 @@
-import React from 'react';
+import {JSX} from 'solid-js';
 import {render, Text} from '../..';
 
 class Test extends React.Component<Record<string, unknown>, {counter: number}> {

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {createSignal, createEffect} from 'solid-js';
 import test from 'ava';
 import boxen, {Options} from 'boxen';
 import indentString from 'indent-string';
@@ -253,9 +253,9 @@ test('render border after update', async t => {
 	const stdout = createStdout();
 
 	const Test = () => {
-		const [borderColor, setBorderColor] = useState();
+		const [borderColor, setBorderColor] = createSignal();
 
-		useEffect(() => {
+		createEffect(() => {
 			setBorderColor('green');
 		}, []);
 

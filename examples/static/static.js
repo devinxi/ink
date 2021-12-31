@@ -1,11 +1,18 @@
 'use strict';
-const React = require('react');
-const {render, Static, Box, Text} = require('../..');
+const {
+	render,
+	createSignal,
+	createEffect,
+	Static,
+	Box,
+	Text,
+	onCleanup
+} = require('../..');
 
 const Example = () => {
-	const [tests, setTests] = React.useState([]);
+	const [tests, setTests] = createSignal([]);
 
-	React.useEffect(() => {
+	createEffect(() => {
 		let completedTests = 0;
 		let timer;
 
@@ -25,14 +32,14 @@ const Example = () => {
 
 		run();
 
-		return () => {
+		 onCleanup(() => {
 			clearTimeout(timer);
-		};
+		});
 	}, []);
 
 	return (
 		<>
-			<Static items={tests}>
+			<Static items={tests()}>
 				{test => (
 					<Box key={test.id}>
 						<Text color="green">✔ {test.title}</Text>
@@ -41,10 +48,10 @@ const Example = () => {
 			</Static>
 
 			<Box marginTop={1}>
-				<Text dimColor>Completed tests: {tests.length}</Text>
+				<Text dimColor>Completed tests: {tests().length}</Text>
 			</Box>
 		</>
 	);
 };
 
-render(<Example />);
+render(() => <Example />);

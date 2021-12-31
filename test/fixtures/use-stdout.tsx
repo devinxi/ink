@@ -1,10 +1,10 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC, createEffect} from 'solid-js';
 import {render, useStdout, Text} from '../..';
 
 const WriteToStdout: FC = () => {
 	const {write} = useStdout();
 
-	useEffect(() => {
+	createEffect(() => {
 		write('Hello from Ink to stdout\n');
 	}, []);
 

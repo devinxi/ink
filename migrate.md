@@ -177,7 +177,7 @@ Previously you had to use the undocumented `unstable__getComputedWidth` method.
 const Example = () => {
 	const boxRef = useRef();
 
-	useEffect(() => {
+	createEffect(() => {
 		const width = boxRef.current.unstable__getComputedWidth();
 		//=> 100
 	}, []);
@@ -191,7 +191,7 @@ import {measureElement} from 'ink';
 const Example = () => {
 	const boxRef = useRef();
 
-	useEffect(() => {
+	createEffect(() => {
 		const {width, height} = measureElement(boxRef.current);
 		//=> width = 100, height = 1
 	}, []);

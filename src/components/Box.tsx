@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
-import React, {forwardRef, PropsWithChildren} from 'react';
+import {PropsWithChildren, JSX, mergeProps, splitProps} from 'solid-js';
 import {Except} from 'type-fest';
 import {Styles} from '../styles';
 import {DOMElement} from '../dom';
@@ -51,10 +51,16 @@ export type Props = Except<Styles, 'textWrap'> & {
 /**
  * `<Box>` is an essential Ink component to build your layout. It's like `<div style="display: flex">` in the browser.
  */
-const Box = forwardRef<DOMElement, PropsWithChildren<Props>>(
-	({children, ...style}, ref) => {
-		const transformedStyle = {
-			...style,
+const Box = (props: PropsWithChildren<Props>): JSX.Element => {
+	const [{children}, style] = splitProps(props, ['ref', 'children']);
+	const transformedStyle = mergeProps(
+		{
+			flexDirection: 'row',
+			flexGrow: 0,
+			flexShrink: 1
+		},
+		style,
+		{
 			marginLeft: style.marginLeft || style.marginX || style.margin || 0,
 			marginRight: style.marginRight || style.marginX || style.margin || 0,
 			marginTop: style.marginTop || style.marginY || style.margin || 0,
@@ -63,15 +69,15 @@ const Box = forwardRef<DOMElement, PropsWithChildren<Props>>(
 			paddingRight: style.paddingRight || style.paddingX || style.padding || 0,
 			paddingTop: style.paddingTop || style.paddingY || style.padding || 0,
 			paddingBottom: style.paddingBottom || style.paddingY || style.padding || 0
-		};
+		}
+	);
 
-		return (
-			<ink-box ref={ref} style={transformedStyle}>
-				{children}
-			</ink-box>
-		);
-	}
-);
+	return (
+		<ink-box ref={props.ref} style={transformedStyle}>
+			{children}
+		</ink-box>
+	);
+};
 
 Box.displayName = 'Box';
 

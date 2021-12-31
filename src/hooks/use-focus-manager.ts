@@ -1,4 +1,4 @@
-import {useContext} from 'react';
+import {useContext} from 'solid-js';
 import FocusContext, {Props} from '../components/FocusContext';
 
 interface Output {

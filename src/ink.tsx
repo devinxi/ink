@@ -1,18 +1,17 @@
-import React, {ReactNode} from 'react';
 import {throttle, DebouncedFunc} from 'lodash';
 import logUpdate, {LogUpdate} from './log-update';
 import ansiEscapes from 'ansi-escapes';
 import originalIsCI from 'is-ci';
 import autoBind from 'auto-bind';
-import reconciler from './reconciler';
-import render from './renderer';
 import signalExit from 'signal-exit';
+import renderNode from './renderer';
 import patchConsole from 'patch-console';
 import * as dom from './dom';
-import {FiberRoot} from 'react-reconciler';
 import instances from './instances';
 import App from './components/App';
+import {JSX, render} from './solid-ink';
 
+import {hostContext} from '.';
 const isCI = process.env.CI === 'false' ? false : originalIsCI;
 const noop = () => {};
 
@@ -33,7 +32,7 @@ export default class Ink {
 	// Ignore last render after unmounting a tree to prevent empty output before exit
 	private isUnmounted: boolean;
 	private lastOutput: string;
-	private readonly container: FiberRoot;
+	private readonly container: any;
 	private readonly rootNode: dom.DOMElement;
 	// This variable is used only in debug mode to store full static output
 	// so that it's rerendered every time, not just new static parts, like in non-debug mode
@@ -56,6 +55,8 @@ export default class Ink {
 			  });
 
 		this.rootNode.onImmediateRender = this.onRender;
+
+		hostContext.rootNode = this.rootNode;
 		this.log = logUpdate.create(options.stdout);
 		this.throttledLog = options.debug
 			? this.log
@@ -74,26 +75,20 @@ export default class Ink {
 		// so that it's rerendered every time, not just new static parts, like in non-debug mode
 		this.fullStaticOutput = '';
 
-		this.container = reconciler.createContainer(
-			this.rootNode,
-			// Legacy mode
-			0,
-			false,
-			null
-		);
+		this.container = this.rootNode;
 
 		// Unmount when process exits
 		this.unsubscribeExit = signalExit(this.unmount, {alwaysLast: false});
 
-		if (process.env.DEV === 'true') {
-			reconciler.injectIntoDevTools({
-				bundleType: 0,
-				// Reporting React DOM's version, not Ink's
-				// See https://github.com/facebook/react/issues/16666#issuecomment-532639905
-				version: '16.13.1',
-				rendererPackageName: 'ink'
-			});
-		}
+		// if (process.env.DEV === 'true') {
+		// 	reconciler.injectIntoDevTools({
+		// 		bundleType: 0,
+		// 		// Reporting React DOM's version, not Ink's
+		// 		// See https://github.com/facebook/react/issues/16666#issuecomment-532639905
+		// 		version: '16.13.1',
+		// 		rendererPackageName: 'ink'
+		// 	});
+		// }
 
 		if (options.patchConsole) {
 			this.patchConsole();
@@ -117,7 +112,7 @@ export default class Ink {
 			return;
 		}
 
-		const {output, outputHeight, staticOutput} = render(
+		const {output, outputHeight, staticOutput} = renderNode(
 			this.rootNode,
 			// The 'columns' property can be undefined or 0 when not using a TTY.
 			// In that case we fall back to 80.
@@ -171,22 +166,24 @@ export default class Ink {
 		this.lastOutput = output;
 	};
 
-	render(node: ReactNode): void {
-		const tree = (
-			<App
-				stdin={this.options.stdin}
-				stdout={this.options.stdout}
-				stderr={this.options.stderr}
-				writeToStdout={this.writeToStdout}
-				writeToStderr={this.writeToStderr}
-				exitOnCtrlC={this.options.exitOnCtrlC}
-				onExit={this.unmount}
-			>
-				{node}
-			</App>
-		);
+	render(node: () => JSX.Element): void {
+		// const tree = (
+		// 	<App
+		// 		stdin={this.options.stdin}
+		// 		stdout={this.options.stdout}
+		// 		stderr={this.options.stderr}
+		// 		writeToStdout={this.writeToStdout}
+		// 		writeToStderr={this.writeToStderr}
+		// 		exitOnCtrlC={this.options.exitOnCtrlC}
+		// 		onExit={this.unmount}
+		// 	>
+		// 		{node}
+		// 	</App>
+		// );
 
-		reconciler.updateContainer(tree, this.container, null, noop);
+		render(node, this.container);
+
+		setInterval(() => this.onRender(), 100);
 	}
 
 	writeToStdout(data: string): void {
@@ -256,7 +253,7 @@ export default class Ink {
 
 		this.isUnmounted = true;
 
-		reconciler.updateContainer(null, this.container, null, noop);
+		// reconciler.updateContainer(null, this.container, null, noop);
 		instances.delete(this.options.stdout);
 
 		if (error instanceof Error) {

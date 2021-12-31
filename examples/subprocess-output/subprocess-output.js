@@ -5,9 +5,9 @@ const stripAnsi = require('strip-ansi');
 const {render, Text, Box} = require('../..');
 
 const SubprocessOutput = () => {
-	const [output, setOutput] = React.useState('');
+	const [output, setOutput] = createSignal('');
 
-	React.useEffect(() => {
+	createEffect(() => {
 		const subProcess = childProcess.spawn('node', ['examples/jest']);
 
 		subProcess.stdout.on('data', newOutput => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import {JSX} from 'solid-js';
 import {Static, Box, Text, render} from '../..';
 
 const EraseWithStatic = () => (

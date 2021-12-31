@@ -1,4 +1,4 @@
-import React from 'react';
+import {JSX} from 'solid-js';
 import {Text, render, useStdin} from '../..';
 
 class ExitDoubleRawMode extends React.Component<{

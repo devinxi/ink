@@ -1,5 +1,5 @@
 import EventEmitter from 'events';
-import React, {useState, Component, FC} from 'react';
+import React, {createSignal, Component, FC} from 'solid-js';
 import test from 'ava';
 import chalk from 'chalk';
 import {spy} from 'sinon';
@@ -317,7 +317,7 @@ test('<Transform> with null children', t => {
 
 test('hooks', t => {
 	const WithHooks = () => {
-		const [value] = useState('Hello');
+		const [value] = createSignal('Hello');
 
 		return <Text>{value}</Text>;
 	};
