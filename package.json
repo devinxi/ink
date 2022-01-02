@@ -16,7 +16,7 @@
 		"node": ">=10"
 	},
 	"scripts": {
-		"build": "rm -rf dist && vite build --ssr && ./build.js && rm -rf tmp && npm run types",
+		"build": "rm -rf dist && vite build --ssr && ./build.js && rm -rf tmp",
 		"ink": "babel-node -x \".js\",\".jsx\",\".es6\",\".es\",\".ts\",\".tsx\",\".cjs\" --config-file ./babel.config.test.js --ignore dist",
 		"types": "tsc --emitDeclarationOnly",
 		"test": "tsc --noEmit && xo && FORCE_COLOR=true ava",
