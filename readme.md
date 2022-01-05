@@ -7,7 +7,8 @@
 	<br>
 </h1>
 
-> React for CLIs. Build and test your CLI output using components.
+
+> Solid for CLIs. Build and test your CLI output using components.
 
 [![Build Status](https://github.com/vadimdemedes/ink/workflows/test/badge.svg)](https://github.com/vadimdemedes/ink/actions)
 [![npm](https://img.shields.io/npm/dm/ink?logo=npm)](https://npmjs.com/package/ink)
