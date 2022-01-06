@@ -1,7 +1,8 @@
 import { Accessor, Component, JSX } from 'solid-js';
+import { DOMElement } from './dom';
 export declare let hostContext: {
     isInsideText: boolean;
-    rootNode: null;
+    rootNode: DOMElement | null;
 };
 export type { JSX };
 export declare const render: (code: () => unknown, node: unknown) => () => void, effect: <T>(fn: (prev?: T | undefined) => T, init?: T | undefined) => void, memo: <T>(fn: () => T, equal: boolean) => () => T, createComponent: <T>(Comp: (props: T) => unknown, props: T) => unknown, createElement: (tag: string) => unknown, createTextNode: (value: string) => unknown, insertNode: (parent: unknown, node: unknown, anchor?: unknown) => void, insert: <T>(parent: any, accessor: T | (() => T), marker?: any) => unknown, spread: <T>(node: any, accessor: T | (() => T), skipChildren?: Boolean | undefined) => void, setProp: <T>(node: unknown, name: string, value: T, prev?: T | undefined) => T, mergeProps: (...sources: unknown[]) => unknown;

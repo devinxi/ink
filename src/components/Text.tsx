@@ -1,4 +1,4 @@
-import React, {FC, ReactNode} from 'solid-js';
+import {children, JSX, mergeProps} from 'solid-js';
 import chalk, {ForegroundColor} from 'chalk';
 import colorize from '../colorize';
 import {Styles} from '../styles';
@@ -51,58 +51,59 @@ export interface Props {
 	 * If `truncate-*` is passed, Ink will truncate text instead, which will result in one line of text with the rest cut off.
 	 */
 	readonly wrap?: Styles['textWrap'];
-	readonly children?: ReactNode;
+	readonly children?: JSX.Element;
 }
 
 /**
  * This component can display text, and change its style to make it colorful, bold, underline, italic or strikethrough.
  */
-const Text: FC<Props> = ({
-	color,
-	backgroundColor,
-	dimColor,
-	bold,
-	italic,
-	underline,
-	strikethrough,
-	inverse,
-	wrap,
-	children
-}) => {
-	if (children === undefined || children === null) {
+const Text = (props: Props): JSX.Element => {
+	props = mergeProps(
+		{
+			dimColor: false,
+			bold: false,
+			italic: false,
+			underline: false,
+			strikethrough: false,
+			wrap: 'wrap'
+		},
+		props
+	);
+
+	if (props.children === undefined || props.children === null) {
 		return null;
 	}
 
 	const transform = (children: string): string => {
-		if (dimColor) {
+		if (props.dimColor) {
 			children = chalk.dim(children);
 		}
 
-		if (color) {
-			children = colorize(children, color, 'foreground');
+		if (props.color) {
+			children = colorize(children, props.color, 'foreground');
 		}
 
-		if (backgroundColor) {
-			children = colorize(children, backgroundColor, 'background');
+		if (props.backgroundColor) {
+			children = colorize(children, props.backgroundColor, 'background');
 		}
 
-		if (bold) {
+		if (props.bold) {
 			children = chalk.bold(children);
 		}
 
-		if (italic) {
+		if (props.italic) {
 			children = chalk.italic(children);
 		}
 
-		if (underline) {
+		if (props.underline) {
 			children = chalk.underline(children);
 		}
 
-		if (strikethrough) {
+		if (props.strikethrough) {
 			children = chalk.strikethrough(children);
 		}
 
-		if (inverse) {
+		if (props.inverse) {
 			children = chalk.inverse(children);
 		}
 
@@ -111,10 +112,15 @@ const Text: FC<Props> = ({
 
 	return (
 		<ink-text
-			style={{flexGrow: 0, flexShrink: 1, flexDirection: 'row', textWrap: wrap}}
+			style={{
+				flexGrow: 0,
+				flexShrink: 1,
+				flexDirection: 'row',
+				textWrap: props.wrap
+			}}
 			internal_transform={transform}
 		>
-			{children}
+			{children(() => props.children)}
 		</ink-text>
 	);
 };

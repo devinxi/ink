@@ -6,9 +6,12 @@ const cjs = {
 	platform: 'node',
 	format: 'cjs',
 	bundle: true,
-	minify: true,
+	minify: false,
 	plugins: [
 		require('esbuild-plugin-alias')({
+			'solid-js/store': __dirname + '/node_modules/solid-js/store/dist/dev.js',
+			'solid-js/universal':
+				__dirname + '/node_modules/solid-js/universal/dist/dev.js',
 			'solid-js': __dirname + '/node_modules/solid-js/dist/dev.js'
 		})
 	],
@@ -22,9 +25,12 @@ const esm = {
 	platform: 'node',
 	format: 'esm',
 	bundle: true,
-	minify: true,
+	minify: false,
 	plugins: [
 		require('esbuild-plugin-alias')({
+			'solid-js/store': __dirname + '/node_modules/solid-js/store/dist/dev.js',
+			'solid-js/universal':
+				__dirname + '/node_modules/solid-js/universal/dist/dev.js',
 			'solid-js': __dirname + '/node_modules/solid-js/dist/dev.js'
 		})
 	],

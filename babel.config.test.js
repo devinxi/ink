@@ -5,15 +5,23 @@ module.exports = {
 	],
 	plugins: [
 		[
+			'babel-plugin-jsx-dom-expressions',
+			{moduleName: 'solid-mdx', generate: 'universal'}
+		],
+		[
 			'babel-plugin-transform-rename-import',
 			{
 				original: 'solid-js',
-				replacement: '..'
+				replacement: __dirname + '/'
 			}
 		],
 		[
-			'babel-plugin-jsx-dom-expressions',
-			{moduleName: '..', generate: 'universal'}
+			'babel-plugin-transform-rename-import',
+			{
+				original: 'solid-mdx',
+				replacement: __dirname + '/'
+			},
+			'mdx'
 		]
 	]
 };

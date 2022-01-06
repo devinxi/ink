@@ -26,7 +26,7 @@ export default class Ink {
     rejectExitPromise: (reason?: Error) => void;
     unsubscribeExit: () => void;
     onRender: () => void;
-    render(node: () => JSX.Element): void;
+    render(Component: () => JSX.Element): void;
     writeToStdout(data: string): void;
     writeToStderr(data: string): void;
     unmount(error?: Error | number | null): void;

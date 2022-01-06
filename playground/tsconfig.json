@@ -8,5 +8,5 @@
 		"jsxImportSource": "solid-js",
 		"emitDeclarationOnly": true
 	},
-	"include": ["src"]
+	"include": ["./"]
 }

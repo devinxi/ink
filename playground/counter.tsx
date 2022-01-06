@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use strict';
 import {render, Text, createSignal, createEffect, JSX} from '..';
 
