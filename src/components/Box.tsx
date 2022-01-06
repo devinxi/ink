@@ -52,7 +52,7 @@ export type Props = Except<Styles, 'textWrap'> & {
  * `<Box>` is an essential Ink component to build your layout. It's like `<div style="display: flex">` in the browser.
  */
 const Box = (props: PropsWithChildren<Props>): JSX.Element => {
-	const [{children}, style] = splitProps(props, ['ref', 'children']);
+	const [sProps, style] = splitProps(props, ['ref', 'children']);
 	const transformedStyle = mergeProps(
 		{
 			flexDirection: 'row',
@@ -74,7 +74,7 @@ const Box = (props: PropsWithChildren<Props>): JSX.Element => {
 
 	return (
 		<ink-box ref={props.ref} style={transformedStyle}>
-			{children}
+			{sProps.children}
 		</ink-box>
 	);
 };

@@ -26,3 +26,4 @@ export {default as useFocusManager} from './hooks/use-focus-manager';
 export {default as measureElement} from './measure-element';
 export type {DOMElement} from './dom';
 export * from './solid-ink';
+export * from 'solid-js/store';

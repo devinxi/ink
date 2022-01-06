@@ -9,7 +9,7 @@ import patchConsole from 'patch-console';
 import * as dom from './dom';
 import instances from './instances';
 import App from './components/App';
-import {JSX, render} from './solid-ink';
+import {Dynamic, JSX, render} from './solid-ink';
 
 import {hostContext} from '.';
 const isCI = process.env.CI === 'false' ? false : originalIsCI;
@@ -166,22 +166,23 @@ export default class Ink {
 		this.lastOutput = output;
 	};
 
-	render(node: () => JSX.Element): void {
-		// const tree = (
-		// 	<App
-		// 		stdin={this.options.stdin}
-		// 		stdout={this.options.stdout}
-		// 		stderr={this.options.stderr}
-		// 		writeToStdout={this.writeToStdout}
-		// 		writeToStderr={this.writeToStderr}
-		// 		exitOnCtrlC={this.options.exitOnCtrlC}
-		// 		onExit={this.unmount}
-		// 	>
-		// 		{node}
-		// 	</App>
-		// );
-
-		render(node, this.container);
+	render(Component: () => JSX.Element): void {
+		render(
+			() => (
+				<App
+					stdin={this.options.stdin}
+					stdout={this.options.stdout}
+					stderr={this.options.stderr}
+					writeToStdout={this.writeToStdout}
+					writeToStderr={this.writeToStderr}
+					exitOnCtrlC={this.options.exitOnCtrlC}
+					onExit={this.unmount}
+				>
+					<Dynamic component={Component} />
+				</App>
+			),
+			this.container
+		);
 
 		setInterval(() => this.onRender(), 100);
 	}

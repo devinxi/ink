@@ -13,9 +13,11 @@ import {
 	markNodeAsDirty,
 	removeChildNode,
 	setAttribute,
+	DOMElement,
 	setStyle,
 	createTextNode as domText,
-	insertBeforeNode
+	insertBeforeNode,
+	setTextNodeValue
 } from './dom';
 import {OutputTransformer} from './render-node-to-output';
 import {Styles} from './styles';
@@ -27,7 +29,7 @@ import {Styles} from './styles';
 // export const threeRenderer = createSolidRenderer(threeReconciler);
 export let hostContext = {
 	isInsideText: false,
-	rootNode: null
+	rootNode: null as DOMElement | null
 };
 
 export type {JSX};
@@ -44,7 +46,7 @@ export const {
 	spread,
 	setProp,
 	mergeProps
-} = createRenderer({
+} = createRenderer<DOMElement>({
 	createElement: originalType => {
 		if (hostContext.isInsideText && originalType === 'ink-box') {
 			throw new Error(`<Box> can’t be nested inside <Text> component`);
@@ -89,6 +91,9 @@ export const {
 		// 	node,
 		// 	node.parentNode.childNodes.indexOf(node)
 		// );
+	},
+	replaceText(node, text) {
+		setTextNodeValue(node, text);
 	},
 	insertNode: (node, childNode, oldChildNode) => {
 		insertBeforeNode(node, childNode, oldChildNode);

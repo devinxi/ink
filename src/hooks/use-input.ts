@@ -1,4 +1,4 @@
-import {createEffect} from 'solid-js';
+import {createEffect, onCleanup} from 'solid-js';
 import useStdin from './use-stdin';
 
 /**
@@ -122,10 +122,10 @@ const useInput = (inputHandler: Handler, options: Options = {}) => {
 
 		setRawMode(true);
 
-		return () => {
+		onCleanup(() => {
 			setRawMode(false);
-		};
-	}, [options.isActive, setRawMode]);
+		});
+	});
 
 	createEffect(() => {
 		if (options.isActive === false) {
@@ -188,10 +188,10 @@ const useInput = (inputHandler: Handler, options: Options = {}) => {
 
 		stdin?.on('data', handleData);
 
-		return () => {
+		onCleanup(() => {
 			stdin?.off('data', handleData);
-		};
-	}, [options.isActive, stdin, internal_exitOnCtrlC, inputHandler]);
+		});
+	});
 };
 
 export default useInput;

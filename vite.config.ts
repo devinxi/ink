@@ -58,6 +58,7 @@ export default defineConfig(
 			],
 			resolve: {
 				alias: {
+					'solid-js/store': './node_modules/solid-js/store/dist/dev.js',
 					'solid-js/universal': './node_modules/solid-js/universal/dist/dev.js',
 					'solid-js': './node_modules/solid-js/dist/dev.js'
 				}
