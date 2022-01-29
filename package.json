@@ -98,7 +98,7 @@
 		"signal-exit": "^3.0.2",
 		"sinon": "^8.1.1",
 		"slice-ansi": "^3.0.0",
-		"solid-js": "^1.2.6",
+		"solid-js": "1.2.6",
 		"stack-utils": "^2.0.2",
 		"string-width": "^4.2.2",
 		"strip-ansi": "^6.0.0",
