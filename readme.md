@@ -23,36 +23,69 @@ Only Ink's methods will be documented in this readme.
 
 **Note:** This is documentation for Ink 3. If you're looking for docs on Ink 2, check out [this release](https://github.com/vadimdemedes/ink/tree/v2.7.1). There's also a [migration guide](migrate.md) from Ink 2 available.
 
-## Install
+# solid-ink
 
-```sh
-npm install ink react
-```
+## Getting started
 
-## Usage
+1. Install dependencies from `npm` using your package manager of choice
 
-```jsx
-import React, {createSignal, createEffect} from 'solid-js';
-import {render, Text} from 'ink';
+   ```bash
+   npm install solid-ink vite vite-node vite-plugin-solid
 
-const Counter = () => {
-	const [counter, setCounter] = createSignal(0);
+   pnpm install solid-ink vite vite-node vite-plugin-solid
 
-	createEffect(() => {
-		const timer = setInterval(() => {
-			setCounter(previousCounter => previousCounter + 1);
-		}, 100);
+   yarn add solid-ink vite vite-node vite-plugin-solid
+   ```
 
-		return () => {
-			clearInterval(timer);
-		};
-	}, []);
+2. Create your script in a file called `script.tsx` in your project directory
 
-	return <Text color="green">{counter} tests passed</Text>;
-};
+   ```typescript
+   import {render, Text, createSignal, createEffect} from 'solid-ink';
 
-render(<Counter />);
-```
+   const Counter = () => {
+   	const [counter, setCounter] = createSignal(0);
+
+   	createEffect(() => {
+   		const timer = setInterval(() => {
+   			setCounter(prevCounter => prevCounter + 1); // eslint-disable-line unicorn/prevent-abbreviations
+   		}, 100);
+
+   		return () => {
+   			clearInterval(timer);
+   		};
+   	});
+
+   	return <Text color="green">{counter} tests passed</Text>;
+   };
+
+   render(() => <Counter />);
+   ```
+
+3. Configure `vite` to handle the JSX in our script.
+
+   - Add a `vite.config.ts` file at the root of your directory
+
+     ```typescript
+     import vite from 'vite;
+     import solid from 'vite-plugin-solid' 
+
+     export default defineConfig({
+     	plugins: [
+     		solid({
+     			solid: {
+     				moduleName: "solid-ink",
+     				generate: "universal" as any
+     			}
+     		})
+     	]
+     });
+     ```
+
+4. Run your script!
+
+   ```bash
+   npx vite-node script.tsx
+   ```
 
 <img src="media/demo.svg" width="600">
 

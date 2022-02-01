@@ -48,12 +48,12 @@ function script() {
 		tsc: false
 	});
 
-	estrella.build({
-		entry: 'tmp/index.js',
-		outfile: 'dist/ink.mjs',
-		...esm,
-		tsc: false
-	});
+	// estrella.build({
+	// 	entry: 'tmp/index.js',
+	// 	outfile: 'dist/ink.mjs',
+	// 	...esm,
+	// 	tsc: false
+	// });
 }
 
 script();
