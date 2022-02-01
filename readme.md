@@ -7,7 +7,6 @@
 	<br>
 </h1>
 
-
 > Solid for CLIs. Build and test your CLI output using components.
 
 [![Build Status](https://github.com/vadimdemedes/ink/workflows/test/badge.svg)](https://github.com/vadimdemedes/ink/actions)
@@ -29,7 +28,7 @@ Only Ink's methods will be documented in this readme.
 
 1. Install dependencies from `npm` using your package manager of choice
 
-   ```bash
+   ```shell
    npm install solid-ink vite vite-node vite-plugin-solid
 
    pnpm install solid-ink vite vite-node vite-plugin-solid
@@ -61,20 +60,20 @@ Only Ink's methods will be documented in this readme.
    render(() => <Counter />);
    ```
 
-3. Configure `vite` to handle the JSX in our script.
+3. Configure `vite` to handle the JSX in our script.
 
-   - Add a `vite.config.ts` file at the root of your directory
+   - Add a `vite.config.ts` file at the root of your directory
 
      ```typescript
-     import vite from 'vite;
-     import solid from 'vite-plugin-solid' 
+     import vite from 'vite';
+     import solid from 'vite-plugin-solid';
 
      export default defineConfig({
      	plugins: [
      		solid({
      			solid: {
-     				moduleName: "solid-ink",
-     				generate: "universal" as any
+     				moduleName: 'solid-ink',
+     				generate: 'universal' as any
      			}
      		})
      	]
@@ -83,7 +82,7 @@ Only Ink's methods will be documented in this readme.
 
 4. Run your script!
 
-   ```bash
+   ```shell
    npx vite-node script.tsx
    ```
 
