@@ -5,7 +5,7 @@ export declare let hostContext: {
     rootNode: DOMElement | null;
 };
 export type { JSX };
-export declare const render: (code: () => unknown, node: unknown) => () => void, effect: <T>(fn: (prev?: T | undefined) => T, init?: T | undefined) => void, memo: <T>(fn: () => T, equal: boolean) => () => T, createComponent: <T>(Comp: (props: T) => unknown, props: T) => unknown, createElement: (tag: string) => unknown, createTextNode: (value: string) => unknown, insertNode: (parent: unknown, node: unknown, anchor?: unknown) => void, insert: <T>(parent: any, accessor: T | (() => T), marker?: any) => unknown, spread: <T>(node: any, accessor: T | (() => T), skipChildren?: Boolean | undefined) => void, setProp: <T>(node: unknown, name: string, value: T, prev?: T | undefined) => T, mergeProps: (...sources: unknown[]) => unknown;
+export declare const render: (code: () => DOMElement, node: DOMElement) => () => void, effect: <T>(fn: (prev?: T | undefined) => T, init?: T | undefined) => void, memo: <T>(fn: () => T, equal: boolean) => () => T, createComponent: <T>(Comp: (props: T) => DOMElement, props: T) => DOMElement, createElement: (tag: string) => DOMElement, createTextNode: (value: string) => DOMElement, insertNode: (parent: DOMElement, node: DOMElement, anchor?: DOMElement | undefined) => void, insert: <T>(parent: any, accessor: T | (() => T), marker?: any) => DOMElement, spread: <T>(node: any, accessor: T | (() => T), skipChildren?: Boolean | undefined) => void, setProp: <T>(node: DOMElement, name: string, value: T, prev?: T | undefined) => T, mergeProps: (...sources: unknown[]) => unknown;
 export * from 'solid-js';
 declare type DynamicProps<T> = T & {
     children?: any;

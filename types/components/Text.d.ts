@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'solid-js';
+import { JSX } from 'solid-js';
 import { ForegroundColor } from 'chalk';
 import { Styles } from '../styles';
 import { LiteralUnion } from 'type-fest';
@@ -41,11 +41,22 @@ export interface Props {
      * If `truncate-*` is passed, Ink will truncate text instead, which will result in one line of text with the rest cut off.
      */
     readonly wrap?: Styles['textWrap'];
-    readonly children?: ReactNode;
+    readonly children?: JSX.Element;
 }
 /**
  * This component can display text, and change its style to make it colorful, bold, underline, italic or strikethrough.
  */
-declare const Text: FC<Props>;
+declare const Text: {
+    (props: Props): JSX.Element;
+    displayName: string;
+    defaultProps: {
+        dimColor: boolean;
+        bold: boolean;
+        italic: boolean;
+        underline: boolean;
+        strikethrough: boolean;
+        wrap: string;
+    };
+};
 export default Text;
 //# sourceMappingURL=Text.d.ts.map
