@@ -1,6 +1,6 @@
 {
 	"name": "solid-ink",
-	"version": "0.0.2",
+	"version": "0.0.4",
 	"description": "Solid JS for CLI",
 	"license": "MIT",
 	"repository": "vadimdemedes/ink",
@@ -10,7 +10,6 @@
 		"url": "https://github.com/vadimdemedes"
 	},
 	"main": "dist/ink.js",
-	"module": "dist/ink.mjs",
 	"types": "types/index.d.ts",
 	"engines": {
 		"node": ">=10"
@@ -41,16 +40,7 @@
 		"colors",
 		"text"
 	],
-	"dependencies": {
-		"@babel/preset-env": "^7.16.5",
-		"@babel/preset-typescript": "^7.16.0",
-		"arr-rotate": "^1.0.0",
-		"babel-plugin-jsx-dom-expressions": "^0.31.1",
-		"babel-plugin-transform-rename-import": "^2.3.0",
-		"cli-spinners": "^2.6.1",
-		"figures": "^3.2.0",
-		"lodash.isequal": "^4.5.0"
-	},
+	"dependencies": {},
 	"devDependencies": {
 		"@babel/core": "^7.16.7",
 		"@babel/node": "^7.16.7",
